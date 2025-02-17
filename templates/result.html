@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prediction Result</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      background-image: url("{{ url_for('static', filename='second.jpg') }}");
+      background-size: cover; 
+      background-position: center; 
+      background-repeat: no-repeat;
+      background-attachment: fixed; 
+    }
+    .result-container {
+      background-color: rgba(255, 255, 255, 0.35); 
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      margin-top: 20px;
+      max-width: 400px;
+      width: 100%;
+    }
+    h2 {
+      color: #4CAF50;
+    }
+    .instructions {
+      background-color: rgba(255, 251, 221, 0.35); 
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 8px;
+      border: 1px solid #f0c36d;
+      color: #333;
+    }
+    .box-link {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: black;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+    .box-link:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="result-container">
+    <h2>PREDICTION RESULT</h2>
+    <p>{{ prediction }}</p>
+
+    {% if instructions %}
+    <div class="instructions">
+      <p>{{ instructions }}</p>
+    </div>
+    {% endif %}
+
+    <a href="{{ url_for('home') }}" class="box-link">Make Another Prediction</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Predict C-section</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url("{{ url_for('static', filename='picyyy.jpg') }}");
+      background-size: cover; 
+      background-position: center; 
+      background-repeat: no-repeat;
+      background-attachment: fixed; 
+    }
+    .outer {
+      background-color: rgba(255, 228, 185, 0.45);
+      width: 400px;
+      padding-left: 40px;
+      padding-right: 60px;
+      padding-bottom: 30px;
+      border-radius: 20px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+      font-family: Arial;
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+    }
+    .input-line {
+      margin-bottom: 10px;
+      font-family: Arial;
+      width: 100%; 
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      padding: 10px;
+      width: 100%;
+      background-color: #4CAF50;
+      color: black;
+      border: none;
+      cursor: pointer;
+      margin-left: 8px;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    h2 {
+      text-align: center;
+    }
+    .result {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="outer">
+    <h2>PREDICT C-SECTION</h2>
+    <form method="POST" action="/predict">
+      <div class="input-line">
+        <label for="fetal_distress">Fetal Distress (1 for Yes, 0 for No):</label>
+        <input type="number" id="fetal_distress" name="fetal_distress" min="0" max="1" required>
+      </div>
+
+      <div class="input-line">
+        <label for="maternal_age">Maternal Age (years):</label>
+        <input type="number" id="maternal_age" name="maternal_age" required>
+      </div>
+
+      <div class="input-line">
+        <label for="gestational_age">Gestational Age (weeks):</label>
+        <input type="number" id="gestational_age" name="gestational_age" required>
+      </div>
+
+      <div class="input-line">
+        <label for="previous_c_section">Previous C-section (1 for Yes, 0 for No):</label>
+        <input type="number" id="previous_c_section" name="previous_c_section" min="0" max="1" required>
+      </div>
+
+      <div class="input-line">
+        <label for="blood_pressure">Blood Pressure (mm Hg):</label>
+        <input type="number" id="blood_pressure" name="blood_pressure" required>
+      </div>
+
+      <div class="input-line">
+        <label for="bmi">BMI:</label>
+        <input type="number" step="0.1" id="bmi" name="bmi" required>
+      </div>
+
+      <button type="submit">PREDICT</button>
+    </form>
+
+    {% if prediction %}
+      <div class="result">
+        <p>Prediction: {{ prediction }}</p>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
